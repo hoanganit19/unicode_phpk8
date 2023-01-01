@@ -1,0 +1,42 @@
+Bài tập về nhà 
+
+1. Viết một chương trình PHP để nhập lương nhân viên, tính thuế thu nhập và lương ròng (số tiền lương thực sự mà nhân viên đó nhận được). Với các thông số giả sử như sau (không theo luật lương, chỉ là con số giả sử để dễ tính toán):
+
+30% thuế thu nhập nếu lương là 15 triệu.
+20% thuế thu nhập nếu lương từ 7 đến 15 triệu.
+10% thuế thu nhập nếu lương dưới 7 triệu.
+
+Ví dụ: 
+
+$luong = 15000000
+
+=> Hiển thị kết quả 
+
+- Lương: 15000000
+- Thuế thu nhập 20%: 3000000
+- Tiền lương thực nhận: 12000000
+
+2. Viết chương trình PHP để nhập tuổi và in ra
+- Tuổi của học sinh đó 
+- Học sinh đó có đủ tuổi vào lớp 10 không
+PS: Biết tuổi vào lớp 10 của học sinh là 16.
+
+3. Viết chương trình tìm số lớn nhất của 3 số $a, $b, $c
+
+4. Viết chương trình hoán vị 2 số $a, $b (không sử dụng biến trung gian)
+
+5. Viết chương trình PHP xếp hạng học lực của học sinh dựa trên: điểm bài kiểm tra, điểm thi giữa kỳ, điểm thi cuối kỳ. Nếu:
+
+Điểm trung bình >= 9.0 là hạng A.
+Điểm trung bình >=7.0 và < 9.0 là hạng B
+Điểm trung bình >=5.0 và < 7.0 là hạng C
+Điểm trung bình <5.0 là hạng F
+
+Input: 
+
+- Điểm bài kiểm tra 
+- Điểm thi giữ kỳ 
+- Điểm thi cuối kỳ 
+
+Output: Thông báo xếp hạng của học sinh
+
