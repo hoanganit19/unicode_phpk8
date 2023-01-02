@@ -35,7 +35,7 @@ PS: Biết tuổi vào lớp 10 của học sinh là 16.
 Input: 
 
 - Điểm bài kiểm tra 
-- Điểm thi giữ kỳ 
+- Điểm thi giữa kỳ 
 - Điểm thi cuối kỳ 
 
 Output: Thông báo xếp hạng của học sinh
