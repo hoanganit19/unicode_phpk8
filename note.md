@@ -76,3 +76,11 @@ Nếu không muốn gán giá trị cho biến mà vẫn biến tồn tại => G
 ### 8. Resource (File, curl, database,...)
 
 ### 9. Callable (Callback)
+
+## Vòng lặp
+
+### Vòng lặp for
+
+- Lặp với số lần lặp xác định trước
+- Vòng lặp tăng và vòng lặp giảm
+- Vòng lặp lồng nhau
