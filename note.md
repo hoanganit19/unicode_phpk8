@@ -84,3 +84,69 @@ Nếu không muốn gán giá trị cho biến mà vẫn biến tồn tại => G
 - Lặp với số lần lặp xác định trước
 - Vòng lặp tăng và vòng lặp giảm
 - Vòng lặp lồng nhau
+
+### Vòng lặp while
+
+- Lặp với số lần lặp không xác định trước
+- Vòng lặp tăng, giảm
+- Vòng lặp lồng nhau
+- Dễ bị rơi vào vòng lặp vô hạn
+- Giải quyết các bài toán dạng chung chung (Không biết trước chạy bao nhiêu lần)
+- Các bài toán viết bằng for, đều chuyển được sang while
+
+### Vòng lặp do while
+
+- Giống while
+- Khác: Chạy trước rồi kiểm tra điều kiện
+
+## Import
+
+- require, include
+- require_once, include_once
+
+Sự khác nhau giữa include và require
+
+- nếu import lỗi => include chỉ báo lỗi warning => Chương trình vẫn chạy
+- nếu import lỗi => require sẽ dừng chương trình
+
+Sự khác nhau giữa include (require) với include_once (require_once)
+
+- include, require: Cho phép import nhiều file giống nhau
+- require_once, include_once: Chỉ cho phép import 1 file
+
+Đường dẫn khi sử dụng import ở dạng document path (File gốc trên server)
+
+Nên dùng đường dẫn tương đối
+
+- Không bị phụ thuộc vào folder gốc
+- Dễ dàng thay đổi mà không bị ảnh hưởng và sửa lại code
+
+## Định nghĩa hàm
+
+1. Khái niệm
+
+- Gom nhóm các đoạn chương trình con để thuận tiện hơn trong quá trình tái sử dụng
+- Tham số
+- Đối số
+- Tham trị
+- Tham biến
+- Tham chiếu
+- Hàm có giá trị trả về (Hàm return)
+- Hàm không có giá trị trả về (Hàm void)
+
+2. Cú pháp
+
+function tenHam($thamso1, $thamso2){
+//Nội dung hàm
+}
+
+- Tên hàm: Dùng động từ, đặt theo quy tắc camelCase
+
+* create, get, set, delete, add, do, make, build,....
+
+=> Tổng kết:
+
+- Vòng lặp
+- Từ khóa hỗ trợ
+- Import
+- Định nghĩa hàm (Nhập môn)
