@@ -144,9 +144,29 @@ function tenHam($thamso1, $thamso2){
 
 * create, get, set, delete, add, do, make, build,....
 
+Lưu ý với từ khóa return
+
+- Trả về giá trị của hàm (Chỉ trả về 1 gias tri)
+- Sau khi gọi return => Các đoạn code bên dưới return sẽ không hoạt động
+
+Hàm có thể hàm khác
+
 => Tổng kết:
 
 - Vòng lặp
 - Từ khóa hỗ trợ
 - Import
 - Định nghĩa hàm (Nhập môn)
+
+Tổng kết ngày 10/1/2022
+
+- Hoàn thành phần định nghĩa hàm
+- Giải thuật đệ quy
+
+Nội dung buổi học sau:
+
+Xử lý chuỗi trong PHP
+
+- Các kỹ thuật xử lý
+- Các hàm hỗ trợ
+- Xử lý chuỗi nâng cao (Regular Expressions - Biểu thức chính quy) => Học ở phần php nâng cao
