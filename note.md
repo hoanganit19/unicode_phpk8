@@ -170,3 +170,18 @@ Xử lý chuỗi trong PHP
 - Các kỹ thuật xử lý
 - Các hàm hỗ trợ
 - Xử lý chuỗi nâng cao (Regular Expressions - Biểu thức chính quy) => Học ở phần php nâng cao
+
+Thao tác xử lý chuỗi
+
+- Hiển thị chuỗi
+- Kiểm tra chuỗi hợp lệ: kiểm tra chuỗi có phải số điện thoại không? Chuỗi có phải email không?
+- Tìm kiếm trong chuỗi
+- Cắt chuỗi
+- Chèn chuỗi
+
+Tổng kết buổi học đầu tiên về chuỗi
+
+- Tổng quan về chuỗi
+- mbstring extensions
+- Hàm xử lý chuỗi (Hay dùng)
+- Ví dụ xử lý chuỗi: lấy username của email, convert ký tự đầu của mỗi chữ sang chữ hoa
