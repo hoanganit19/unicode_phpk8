@@ -1,0 +1,9 @@
+Cho trước 1 mảng
+
+$numbers = [1, 5, 2, 9, 5]
+
+Yêu cầu: 
+
+- Tìm giá trị lớn nhất, nhỏ nhất của mảng 
+- Sắp xếp mảng theo thứ tự tăng dần (Không sử dụng hàm có sẵn)
+- Chèn vào 1 phần tử nhưng không làm thay đổi thứ tự sắp xếp tăng dần
