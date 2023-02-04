@@ -1,0 +1,8 @@
+Điểm mạnh của php là mảng => Tất cả các thành phần trong php đêu chuyển về xử lý mảng 
+
+- session => $_SESSION
+- cookie => $_COOKIE
+- get => $_GET
+- post => $_POST
+
+=> Xử lý mảng
