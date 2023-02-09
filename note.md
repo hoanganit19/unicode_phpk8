@@ -185,3 +185,42 @@ Tổng kết buổi học đầu tiên về chuỗi
 - mbstring extensions
 - Hàm xử lý chuỗi (Hay dùng)
 - Ví dụ xử lý chuỗi: lấy username của email, convert ký tự đầu của mỗi chữ sang chữ hoa
+
+Các phương thức nhận và gửi dữ liệu => http method
+
+- get => Nhận dữ liệu
+- post => Gửi dữ liệu
+
+Client => Gửi request (url, method, headers, body,...) => Server => Tiếp nhận request => Xử lý => Response
+
+1. Http method GET
+
+- Để gửi nội dung qua http method get => Query String
+
+- Cấu trúc query string: http://tenmien/path?querystring
+
+Ví dụ: http://tenmien/path?keyword=abc&id=123
+
+Ứng dụng:
+
+- Thiết kế và xây dựng các tính năng có sự thay đổi url
+- Xây dựng lên cấu trúc của dự án
+
+2. Http method POST
+
+- Để gửi nội dung qua http method post => body (payload)
+- Gửi dữ liệu với phương thức post => Không thay đổi url
+- Để gửi dữ liệu bằng post => Cần sử dụng form hoặc thông qua 1 số trình cho phép gửi http method post (file_get_contents(), curl, js: fetch, axios,...)
+
+Khi gửi dữ liệu bằng http method post => Có content-type = application/x-www-form-urlencoded
+
+Ngoài ra có thể 1 số trường content-type = application/json
+
+3. Upload file php
+
+- Để upload được file từ client lên server => content-type = multipart/form-data
+- Trong php sử dụng `$_FILES` để lấy thông tin file gửi lên
+
+timestamp => Số giây tính từ thời điểm 00h00m00s năm 1970 tới thời điểm muốn kiểm tra
+
+session: khi tắt trình duyệt => tạo file session mới => set cookie mới
