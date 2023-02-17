@@ -224,3 +224,33 @@ Ngoài ra có thể 1 số trường content-type = application/json
 timestamp => Số giây tính từ thời điểm 00h00m00s năm 1970 tới thời điểm muốn kiểm tra
 
 session: khi tắt trình duyệt => tạo file session mới => set cookie mới
+
+Xử lý thời gian trong PHP
+
+- Phụ thuộc vào thời gian trên Server
+- Trong quá trình lấy thời gian => Chú ý múi giờ
+
+- timestamp: Số giây từ năm 1970 đến thời điểm muốn kiểm tra
+- Định dạng thời gian:
+
+* d => Ngày
+* m => Tháng
+* Y => Năm
+
+- H => Giờ
+- i => Phút
+- s => Giây
+
+Trong quá trình xử lý thời => Định dạng thời gian đầu vào nên để ở dạng: Y-m-d
+
+## Ngôn ngữ truy vấn SQL
+
+- Hệ quản trị CSDL: Phần mềm (MySQL)
+
+- Khi làm việc với Table trong MySQl
+
+* Cấu trúc bảng
+* Dữ liệu
+
+Tên cột trong table => field (Trường)
+Dữ liệu trong Table => record
