@@ -254,3 +254,75 @@ Trong quá trình xử lý thời => Định dạng thời gian đầu vào nên
 
 Tên cột trong table => field (Trường)
 Dữ liệu trong Table => record
+
+Ví dụ 1 về quan hệ trong Database:
+
+Table users
+
+id => Khóa chính
+name
+email
+group_id => Khóa ngoại
+created_at
+updated_at
+
+Table groups
+id => Khóa chính
+name
+created_at
+updated_at
+
+=> Quan hệ 1 - nhiều (1 group có thể có 1 hoặc nhiều user)
+
+Ví dụ 2:
+
+Table users
+
+- id => Khóa chính
+- name
+- email
+- created_at
+- updated_at
+
+Table phones
+
+- id => Khóa chính
+- phone
+- user_id => Khóa ngoại (Liên kết tới id của bảng users)
+- created_at
+- updated_at
+
+=> Quan hệ 1-1
+
+Ví dụ 3:
+
+Table posts
+
+- id
+- title
+- content
+- created_at
+- updated_at
+
+Table categories
+
+- id
+- name
+- created_at
+- updated_at
+
+Table posts_categories => Liên kết giữa posts và categories
+
+- id
+- post_id => Khóa ngoại (Liên kết tới trường id của table posts)
+- category_id => Khóa ngoại (Liên kết tới trường id của table categories)
+- created_at
+
+=> Quan hệ nhiều - nhiều
+
+Ví dụ phức tạp:
+
+- Tin tức
+- Sản phẩm
+- Đều có phần bình luận
+  => Chỉ muốn dùng 1 table comments chung cho cả tin tức và sản phẩm
