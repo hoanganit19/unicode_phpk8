@@ -326,3 +326,16 @@ Ví dụ phức tạp:
 - Sản phẩm
 - Đều có phần bình luận
   => Chỉ muốn dùng 1 table comments chung cho cả tin tức và sản phẩm
+
+Truy vấn dữ liệu (Ôn tập)
+
+- Join bảng
+- SubQuery (Select lồng)
+- Group By
+
+Tìm hiểu thêm các phần mềm quản lý Database
+
+- phpmyadmin
+- mysql workbench
+- Navicat
+- sequel pro
