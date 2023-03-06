@@ -110,3 +110,41 @@ function getDateFormat($date, $format)
     $dateObj = date_create($date);
     return date_format($dateObj, $format);
 }
+
+function getOperator($filters)
+{
+    if (strpos($filters, 'WHERE') !== false) {
+        return ' AND ';
+    }
+    return ' WHERE ';
+}
+
+function getPaginateUrl($page)
+{
+    //Xử lý query string
+    $query = [];
+    $isPage = false;
+    $currentIndex = null;
+    if (!empty($_SERVER['QUERY_STRING'])) {
+        $query = explode('&', $_SERVER['QUERY_STRING']);
+
+        foreach ($query as $index => $item) {
+            $itemArr = explode('=', $item);
+            if ($itemArr[0] == 'page') {
+                $isPage = true;
+                $currentIndex = $index;
+                break;
+            }
+        }
+    }
+
+    if (!$isPage) {
+        array_push($query, 'page='.$page);
+    } else {
+        $query[$currentIndex] = 'page='.$page;
+    }
+
+    return '?'.implode('&', $query);
+}
+
+//DB::table('users')->where('id', '=', 1)->first();
