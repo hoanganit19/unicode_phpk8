@@ -11,7 +11,7 @@ if (!empty($get['status'])) {
 }
 
 if (!empty($get['group_id'])) {
-    $groupId = $get['group_id{'];
+    $groupId = $get['group_id'];
     $filters.=getOperator($filters).' users.group_id='.$groupId;
 }
 
@@ -51,9 +51,12 @@ $users = get("SELECT users.*, groups.name AS group_name FROM users INNER JOIN gr
 
 $groups = get("SELECT * FROM groups ORDER BY name");
 
+$msg = getFlashData('msg');
+$msgType = getFlashData('msg_type');
+echo getMessage($msg, $msgType);
 ?>
 <h2>Danh sách người dùng</h2>
-
+<a href="?action=add" class="btn btn-primary mb-3">Thêm mới</a>
 <form action="" class="mb-3">
     <div class="row">
         <div class="col-3">
@@ -138,6 +141,12 @@ $groups = get("SELECT * FROM groups ORDER BY name");
         </tr>
         <?php
                 endforeach;
+            else:
+                ?>
+        <tr>
+            <td colspan="8" class="text-center">Không có dữ liệu</td>
+        </tr>
+        <?php
             endif;
 ?>
     </tbody>
