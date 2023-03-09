@@ -1,4 +1,10 @@
 <?php
+
+$login = getSession('loginData');
+if (empty($login)) {
+    redirect('?action=login');
+}
+
 $limit = 3;
 $get = isset($_GET) ? $_GET : false;
 //Xử lý lọc
@@ -54,7 +60,14 @@ $groups = get("SELECT * FROM groups ORDER BY name");
 $msg = getFlashData('msg');
 $msgType = getFlashData('msg_type');
 echo getMessage($msg, $msgType);
+
 ?>
+<div>
+    <ul class="nav">
+        <li>Chào bạn: <?php echo $login['name']; ?></li>
+        <li><a href="?action=logout">Đăng xuất</a></li>
+    </ul>
+</div>
 <h2>Danh sách người dùng</h2>
 <a href="?action=add" class="btn btn-primary mb-3">Thêm mới</a>
 <form action="" class="mb-3">
@@ -133,10 +146,11 @@ echo getMessage($msg, $msgType);
                 <?php echo getDateFormat($user['created_at'], 'd/m/Y H:i:s'); ?>
             </td>
             <td>
-                <a href="#" class="btn btn-warning">Sửa</a>
+                <a href="?action=edit&id=<?php echo $user['id']; ?>" class="btn btn-warning">Sửa</a>
             </td>
             <td>
-                <a href="#" class="btn btn-danger">Xóa</a>
+                <a href="#" class="btn btn-danger delete-btn">Xóa</a>
+                <?php require('form_delete.php'); ?>
             </td>
         </tr>
         <?php
@@ -184,3 +198,18 @@ if ($maxPage > 1):
     </ul>
 </nav>
 <?php endif; ?>
+
+<script>
+const deleteBtn = document.querySelectorAll('.delete-btn');
+if (deleteBtn.length) {
+    deleteBtn.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('Bạn có chắc chắn muốn xóa?')) {
+                const formDelete = e.target.nextElementSibling;
+                formDelete.submit();
+            }
+        })
+    })
+}
+</script>

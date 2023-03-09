@@ -1,4 +1,13 @@
 <?php
+if (!empty($_GET['id'])) {
+    $id = $_GET['id'];
+    $user = first("SELECT * FROM users WHERE id = ?", [$id]);
+    if (!$user) {
+        redirect('index.php');
+    }
+} else {
+    redirect('index.php');
+}
 
 $groups = get("SELECT * FROM groups ORDER BY name");
 
@@ -15,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email']['email'] = 'Email không đúng định dạng';
         } else {
-            //Kiểm tra email trùng lặp
-            $rows = getRows("SELECT id FROM users WHERE email='".$_POST['email']."'");
+            //Kiểm tra email trùng lặp (ignore email hiện tại)
+            $rows = getRows("SELECT id FROM users WHERE email='".$_POST['email']."' AND id != ".$id);
             if ($rows > 0) {
                 $errors['email']['unique'] = 'Email đã tồn tại trên hệ thống';
             }
@@ -33,40 +42,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $groupId = $_POST['group_id'];
         $status = $_POST['status'];
 
-        $createStatus = create('users', [
+        $condition = "id = ".$id;
+
+        $updateStatus = update('users', [
             'name' => $name,
             'email' => $email,
             'group_id' => $groupId,
             'status' => $status,
-            'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        ], $condition);
 
-        if ($createStatus) {
-            //Thêm thành công
-            setSession('msg', 'Thêm người dùng thành công');
+        if ($updateStatus) {
+            //Cập nhật thành công
+            setSession('msg', 'Cập nhật người dùng thành công');
             setSession('msg_type', 'success');
-            redirect('index.php');
         } else {
-            setSession('msg', 'Thêm người dùng thất bại');
+            setSession('msg', 'Cập nhật người dùng thất bại');
             setSession('msg_type', 'danger');
-            reload();
         }
     } else {
         setSession('msg', 'Vui lòng kiểm tra lại dữ liệu');
         setSession('msg_type', 'danger');
         setSession('errors', $errors);
         setSession('old', $_POST);
-        reload();
     }
+
+    reload();
 }
 
 $msg = getFlashData('msg');
 $msgType = getFlashData('msg_type');
 $errors = getFlashData('errors');
 $old = getFlashData('old');
+if (!empty($user) && empty($old)) {
+    $old = $user;
+}
 ?>
-<h2>Thêm người dùng</h2>
+<h2>Cập nhật người dùng</h2>
 <form action="" method="post">
     <?php echo getMessage($msg, $msgType); ?>
     <div class="mb-3">
@@ -109,5 +121,5 @@ $old = getFlashData('old');
             <option value="1" <?php echo getOld('status')==1 ? 'selected' : false; ?>>Kích hoạt</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Thêm mới</button>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
 </form>

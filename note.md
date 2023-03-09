@@ -339,3 +339,38 @@ Tìm hiểu thêm các phần mềm quản lý Database
 - mysql workbench
 - Navicat
 - sequel pro
+
+## Lưu mật khẩu trong Database
+
+Cách cũ:
+
+- md5()
+- sha1()
+
+Khi xây dựng chức năng login:
+
+- Lấy mật khẩu nhập từ input
+- Mã hóa md5 hoặc sha1
+- So sánh mã md5 hoặc sha1 với database
+
+Ưu điểm
+
+- Dễ triển khai
+- Dễ reset lại mật khẩu
+
+Nhược điểm
+
+- Kém an toàn: Tạo hash giống nhau nếu cùng chuỗi đầu vào
+- Những mật khẩu đơn giản dễ bị dịch ngược lại
+
+BÀI TẬP VỀ NHÀ
+
+- Xây dựng chức năng tài khoản (Thông tin cá nhân)
+- Xây dựng chức năng đăng ký tài khoản => Đăng ký thành công, tự động đăng nhập
+
+Buổi sau:
+
+- Quên mật khẩu => Reset mật khẩu
+- Kích hoạt tài khoản => Gửi email
+- Xác minh 2 bước (Qua email)
+- Ajax trong PHP (Tìm hiểu Javascript, jQuery)
