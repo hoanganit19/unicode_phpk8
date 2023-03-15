@@ -2,6 +2,9 @@
 session_start();
 require_once 'config.php';
 require_once 'includes/connect.php';
+require_once 'includes/phpmailer/Exception.php';
+require_once 'includes/phpmailer/PHPMailer.php';
+require_once 'includes/phpmailer/SMTP.php';
 require_once 'includes/functions.php';
 ?>
 <!DOCTYPE html>
@@ -25,6 +28,12 @@ require_once 'includes/functions.php';
             }
 
             $path = 'actions/'. $action. '.php';
+$login = getSession('loginData');
+if (!empty($login)) {
+    require_once 'block/header.php';
+} elseif ((!empty($_GET['action']) && $_GET['action']!='login' && $_GET['action']!='register' && $_GET['action']!='active') || empty($_GET['action'])) {
+    redirect('?action=login');
+}
 require_once $path;
 ?>
     </div>

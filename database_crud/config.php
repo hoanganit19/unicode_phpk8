@@ -7,3 +7,5 @@ const USER = 'root';
 const PASS = '';
 const DB = 'phpdevk8';
 const DRIVER = 'mysql';
+
+const APP_URL = 'http://localhost/phpk8/database_crud';

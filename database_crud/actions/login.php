@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     //Lấy hash trong database
-    $user = first("SELECT * FROM users WHERE email=?", [$email]);
+    $user = first("SELECT * FROM users WHERE email=? AND status=1", [$email]);
 
     if (!empty($user)) {
         $passwordHash = $user['password'];
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             reload();
         }
     } else {
-        setSession('msg', 'Không tìm thấy người dùng');
+        setSession('msg', 'Không tìm thấy người dùng hoặc người dùng chưa được kích hoạt');
         setSession('msg_type', 'danger');
     }
 }

@@ -374,3 +374,24 @@ Buổi sau:
 - Kích hoạt tài khoản => Gửi email
 - Xác minh 2 bước (Qua email)
 - Ajax trong PHP (Tìm hiểu Javascript, jQuery)
+
+Hướng dẫn xây dựng chức năng quên mật khẩu => reset mật khẩu
+
+- Xây dựng form quên mật khẩu (Trường email)
+
+- Kiểm tra email có trùng khớp với database hay không?
+
+* TH1: Trùng => Xử lý tiếp theo
+* TH2: Không trùng => Thông báo lỗi
+
+- Tạo 1 token mới (reset_token)
+
+- Tạo link reset password và gửi email
+
+- Xây dựng trang reset-password
+
+* Kiểm tra token có tồn tại không?
+
+* Nếu tồn tại => Hiển thị form đặt lại mật khẩu (Mật khẩu mới, nhập lại mật khẩu mới)
+
+* Xử lý cập nhật lại mật khẩu

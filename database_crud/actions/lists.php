@@ -1,10 +1,4 @@
 <?php
-
-$login = getSession('loginData');
-if (empty($login)) {
-    redirect('?action=login');
-}
-
 $limit = 3;
 $get = isset($_GET) ? $_GET : false;
 //Xử lý lọc
@@ -62,12 +56,7 @@ $msgType = getFlashData('msg_type');
 echo getMessage($msg, $msgType);
 
 ?>
-<div>
-    <ul class="nav">
-        <li>Chào bạn: <?php echo $login['name']; ?></li>
-        <li><a href="?action=logout">Đăng xuất</a></li>
-    </ul>
-</div>
+
 <h2>Danh sách người dùng</h2>
 <a href="?action=add" class="btn btn-primary mb-3">Thêm mới</a>
 <form action="" class="mb-3">

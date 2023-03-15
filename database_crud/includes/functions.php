@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 //Hàm query
 function query($sql, $data=[], $isStatus = true)
 {
@@ -210,4 +214,33 @@ function getFlashData($key)
     removeSession($key);
 
     return $data;
+}
+
+function sendMail($to, $subject, $content)
+{
+    $mail = new PHPMailer(true);
+
+    $mail->CharSet = "UTF-8";
+
+    //Server settings
+    $mail->SMTPDebug = false;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'contact@unicode.vn';                     //SMTP username
+    $mail->Password   = 'ktkqzcoyblrdfvuw';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('contact@unicode.vn', 'Unicode Academy');    //Add a recipient
+    $mail->addAddress($to);               //Name is optional
+    $mail->addReplyTo('contact@unicode.vn', 'Unicode Academy');
+
+//Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body    = $content;
+
+    return $mail->send(); //Trả về true false
 }
