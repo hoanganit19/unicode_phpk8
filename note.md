@@ -395,3 +395,19 @@ Hướng dẫn xây dựng chức năng quên mật khẩu => reset mật khẩu
 * Nếu tồn tại => Hiển thị form đặt lại mật khẩu (Mật khẩu mới, nhập lại mật khẩu mới)
 
 * Xử lý cập nhật lại mật khẩu
+
+## Ajax
+
+- Ajax là 1 công nghệ hoặc là 1 kỹ thuật
+- Dùng để trao đổi dữ liệu giữa client với server thông qua Javascript
+
+- Client: Javascript
+- Server: PHP
+
+Yêu cầu:
+
+Có kiến thức về Javascript
+
+- Event
+- DOM
+- Fetch Data: fetch(), jquery ajax, axois,...

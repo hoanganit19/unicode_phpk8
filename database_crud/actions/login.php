@@ -42,4 +42,8 @@ $msgType = getFlashData('msg_type');
         <input type="password" name="password" class="form-control" placeholder="Password..." required>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
+    <hr>
+    <p class="text-center">
+        <a href="?action=forgot">Quên mật khẩu?</a>
+    </p>
 </form>
