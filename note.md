@@ -411,3 +411,8 @@ Có kiến thức về Javascript
 - Event
 - DOM
 - Fetch Data: fetch(), jquery ajax, axois,...
+
+Bài tập về nhà: 23/03/2023
+
+- Xây dựng class Database có đủ các phương thức giống như phần function: connect, query, creeate, update, remove, get, first...
+- Thực hành xây dựng CRUD sử dụng class Database đã viết
