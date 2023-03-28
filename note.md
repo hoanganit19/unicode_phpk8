@@ -416,3 +416,36 @@ Bài tập về nhà: 23/03/2023
 
 - Xây dựng class Database có đủ các phương thức giống như phần function: connect, query, creeate, update, remove, get, first...
 - Thực hành xây dựng CRUD sử dụng class Database đã viết
+
+Interface1
+
+extends
+
+Interface2
+
+implement
+
+Class
+
+Thực tế thường:
+Interface => Abstract Class => Class
+
+Bài tập về nhà: 28/03/2023
+
+Code Query Builder để thao tác với CSDL
+
+$db = new DB();
+
+Thêm: $db->table('users')->create([
+'name' => 'Hoàng An',
+'email' => 'contact@contact'
+])
+
+Sửa: $db->table('users')->where('id', '=', 1)->update([
+'name' => 'Hoàng An',
+'email' => 'contact@contact'
+])
+
+Xóa: $db->table('users')->where('id', '=', 1)->delete();
+
+Fetch All: $db->table('users')->select('id', 'name', 'email')->where('id', '>', 1)->get();
