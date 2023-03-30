@@ -22,3 +22,7 @@ $db->table('users')
 // $db->table();
 // $db->select('id', 'name', 'email');
 // $db->where();
+
+//$users = $db->table('users')->get(); //SELECT * FROM users
+//$users = $db->select('id', 'name', 'email')->table('users')->get(); //SELECT id, name, email FROM users
+//$user = $db->table('users')->where('id', '>', 1)->get(); //SELECT * FROM users WHERE id>1
