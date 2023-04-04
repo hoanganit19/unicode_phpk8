@@ -9,7 +9,7 @@
 - Phương pháp này dành cho những người mới bắt đầu học lập trình, không sử dụng hàm
 - Tất cả dòng lệnh đều viết trong file từ trên xuống dưới, dữ liệu đều dùng chung và tất cả các biến đều ở dạng toàn cục.
 
-**Ưu điểm:** 
+**Ưu điểm:**
 
 - Viết code nhanh
 - Chương trình chạy rất nhanh (Vì không phải thông qua giai đoạn gọi hàm, gọi đối tượng,...)
@@ -95,7 +95,7 @@ Object dùng để thể hiện cụ thể từ bản thiết kế (Class)
 - Có tính bảo mật cao
 - Có tính tái sử dụng cao
 
-**Nhược điểm của OOP:** 
+**Nhược điểm của OOP:**
 
 Khó tiếp cận với người mới hoặc những người đã quen với phương pháp lập trình truyền thống
 
@@ -107,7 +107,6 @@ Khó tiếp cận với người mới hoặc những người đã quen với p
 - Trong class sẽ có thuộc tính (biến), phương thức (hàm), hằng số (khai báo bằng từ khoá const)
 - Hiểu thực tế hơn: Class chính là việc đóng gói: biến, hàm, hằng số để sử dụng chặt nó chẽ hơn
 
-
 Cú pháp định nghĩa Class
 
 ```php
@@ -115,14 +114,14 @@ class TenClass{
 
     visibility $property1;
     visibility $property2;
-    
+
     const constant1 = value1;
     const constan2 = value2;
-    
+
     visibility function methodName1(){
         //Method body 1
     }
-    
+
     visibility function methodName2(){
             //Method body 2
         }
@@ -175,16 +174,16 @@ TenClass::TEN_HANG_SO;
 Trong lập trình hướng đối tượng có 3 phạm vi truy cập cơ bản
 
 - public: Cho phép truy cập ở mọi vị trí (Trong và ngoài class)
-- protected: Cho phép truy cập ở class kế thừa 
+- protected: Cho phép truy cập ở class kế thừa
 - private: Chỉ được phép truy cập trong class
 
 ##Phương thức khởi tạo và phương thức huỷ
 
 Trong lập trình hướng đối tượng luôn tồn tại 2 phương thức đặc biệt: `__construct()` và `__destruct()`
 
-Phương thức __construct() sẽ được chạy đầu tiên khi khởi tạo đối tượng => Gọi là phương thức khởi tạo
+Phương thức \_\_construct() sẽ được chạy đầu tiên khi khởi tạo đối tượng => Gọi là phương thức khởi tạo
 
-Phương thức __destruct() sẽ chạy sau khi chương trình chạy xong (Đối tượng không được sử dụng nữa) => Gọi là phương thức huỷ
+Phương thức \_\_destruct() sẽ chạy sau khi chương trình chạy xong (Đối tượng không được sử dụng nữa) => Gọi là phương thức huỷ
 
 ##Kế thừa
 
@@ -201,11 +200,11 @@ Ví dụ mẫu:
 ```php
 class Database{
     public function __construct(){
-        
+
     }
-    
+
     public function fetch(){
-    
+
     }
 }
 
@@ -236,14 +235,14 @@ Phương thức tĩnh và thuộc tính tĩnh (static) thì nó có thể truy c
 
 Class là tĩnh nếu tất cả các phương thức và thuộc tĩnh là tĩnh
 
-**Cách khai báo:** 
+**Cách khai báo:**
 
 ```php
 class Person{
     public static $fullName;
-    
+
     public static function getName(){
-    
+
     }
 }
 ```
@@ -291,13 +290,13 @@ abstract visibility function tenPhuongThuc();
 
 ```php
 abstract class Model{
-    
+
     abstract public function add();
-    
+
     abstract public function update();
-    
+
     abstract public function delete();
-    
+
     abstract public function show();
 }
 ```
@@ -324,17 +323,17 @@ Interface giống như 1 bản hợp đồng ràng buộc và bắt buộc lớp
 
 ```php
 interface AuthInterface{
-    
+
     const _MSG_TEMPLATE = [];
-    
+
     public function login();
-    
+
     public function register();
-    
+
     public function forgotPassword();
-    
+
     public function resetPassword();
-    
+
     public function activeAccount();
 }
 ```
@@ -345,33 +344,33 @@ interface AuthInterface{
 class Auth implement AuthInterface{
 
     public function login(){
-    
+
        //login body
-       
+
     }
-    
+
     public function register(){
-    
+
        //register body
-    
+
     }
-    
+
     public function forgotPassword(){
-    
-       //forgot password body  
-        
+
+       //forgot password body
+
     }
-    
+
     public function resetPassword(){
-    
-       //reset password body  
-    
+
+       //reset password body
+
     }
-    
+
     public function activeAccount(){
-      
+
        //active account body
-        
+
     }
 }
 ```
@@ -399,7 +398,6 @@ interface IFoo extends IBar, ArrayAccess, IteratorAggregate, Serializable{
 - Chia sẻ phương thức, thuộc tính, hằng số giữa các lớp trong quan hệ kế thừa
 - Muốn class này chứa các thành phần private, protected, public
 - Muốn class này chứa các phương thức static, final
-
 
 ###Dùng Interface Template khi:
 
@@ -439,7 +437,7 @@ Traits được hỗ trợ từ phiên bản PHP 5.4, giúp giải quyết vấn
 trait TenTrait
 {
     visibility $tenThuocTinh;
-    
+
     visibility function tenPhuongThuc()
     {
         //Body
@@ -453,7 +451,7 @@ trait TenTrait
 
 class TenClass{
     use TenTrait1, TenTrait2;
-    
+
     visibility function tenPhuongThuc(){
          //Body
     }
@@ -492,7 +490,7 @@ use TenNameSpace\TenClass;
 $tenObject = new TenClass();
 ```
 
-**Lưu ý:** 
+**Lưu ý:**
 
 - Khai báo NameSpace phải đặt ở đầu file PHP
 - Sử dụng NameSpace bằng từ khoá `use` thường đặt ở đầu file, nếu file đó có khai báo NameSpace thì phải đặt dưới phần khai báo đó
@@ -537,29 +535,36 @@ Kỹ thuật này bạn sẽ thường thấy trong các PHP Framework như: Lar
 class DB{
 
     public function table($table){
-    
+
         //Body method
-        
+
         return $this;
     }
-    
+
     public function where($field, $compare, $value){
-        
+
         //Body method
         return $this;
-        
+
     }
-    
+
     public function select($field = '*'){
-        
+
         //Body Method
-           
-        return $this;   
+
+        return $this;
     }
 }
 ```
 
-##Xây dựng Class kết nối và tương tác với Database
+## Những phương thức, hằng số trong OOP
+
+- `__CLASS__` => Trả về tên class hiện tại
+- `__METHOD__` => Trả về tên method hiện tại
+- method_exists => Kiểm tra phương thức tồn tại trong class
+- property_exists => Kiểm tra thuộc tính tồn tại trong class
+
+## Xây dựng Class kết nối và tương tác với Database
 
 - Kết nối Database
 - Các thao tác CURD: Thêm, sửa, xoá, đọc (1 bản ghi, nhiều bản ghi)
