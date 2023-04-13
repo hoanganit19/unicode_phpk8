@@ -449,3 +449,35 @@ Sửa: $db->table('users')->where('id', '=', 1)->update([
 Xóa: $db->table('users')->where('id', '=', 1)->delete();
 
 Fetch All: $db->table('users')->select('id', 'name', 'email')->where('id', '>', 1)->get();
+
+## Rewrite URL
+
+- Viết lại đường dẫn cho đẹp
+- Đường dẫn trên thanh địa chỉ trình duyệt => Đường dẫn ảo => Ánh xạ tới đường dẫn thật nằm trên server
+- Viết lại đường dẫn cần sử dụng các ngôn ngữ ở phía server
+- Phụ thuộc vào WebServer đang sử dụng
+
+* Apache => Viết trong file .htaccess
+* Nginx => Viết trong file cấu hình của tên miền (virtual host)
+* IIS => Viết trong web.config
+
+## Rewrite với Apache (.htaccess)
+
+- Server phải được enable mod_rewrite
+- Giống như 1 lớp bảo vệ folder => Các request do htaccess kiểm soát
+- Ánh xạ tất cả các request vào file index.php
+
+Ví dụ: /san-pham => index.php?module=products
+
+- Enable Rewrite với folder cần rewrite: `RewriteEngine On`
+- Khai báo đường dẫn và đường dẫn thật thông qua `RewriteRule duong-dan-ao duong-dan-that`
+- Chú ý tránh bị trùng cú pháp rewrite (regex)
+
+- Trỏ tên miền unicode.test => rewrite
+
+Lưu ý:
+
+- File index.php nên đặt trong folder public => Bảo mật
+- Trong folder public: Có file .htaccess để ánh xạ url tĩnh => động
+- Trong folder ngoài public: Có file .htaccess => Ánh xạ từ url không có public sang url có public (Loại bỏ public trên url)
+- Nếu có quyền kiểm soát server => Trỏ trực tiếp DOCUMENT_ROOT tới folder public
