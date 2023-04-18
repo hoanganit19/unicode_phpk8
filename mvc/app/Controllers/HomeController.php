@@ -2,16 +2,36 @@
 
 namespace App\Controllers;
 
-class HomeController
+use Core\Controller;
+
+class HomeController extends Controller
 {
     public function index()
     {
-        return 'HomeController Index';
+        //Xử lý logic
+
+        // $data = [
+        //     'title' => "Unicode",
+        //     'users' => [
+        //         'Item 1',
+        //         'Item 2',
+        //         'Item 3'
+        //     ]
+        // ];
+
+        $title = 'Unicode Academy';
+        $users = [
+            'Item 1',
+            'Item 2',
+            'Item 3'
+        ];
+
+        $this->view('home/index', compact('title', 'users'));
     }
 
     public function report()
     {
-        return 'HomeController Report';
+        $this->view('home/report');
     }
 }
 

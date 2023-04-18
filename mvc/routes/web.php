@@ -1,5 +1,6 @@
 <?php
 
+use Core\View;
 use Core\Route;
 use App\Controllers\HomeController;
 use App\Controllers\ProductController;
@@ -19,4 +20,10 @@ use App\Controllers\ProductController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/bao-cao', [HomeController::class, 'report']);
 
+Route::get('/san-pham', [ProductController::class, 'index']);
+
 Route::get('/san-pham/sua/{id}/{slug}', [ProductController::class, 'edit']);
+
+Route::get('/flash-sales', function () {
+    View::render('flash-sales/index');
+});

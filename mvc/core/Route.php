@@ -6,6 +6,11 @@ class Route
 {
     public static $routes = [];
 
+    public function __construct()
+    {
+        require_once __DIR__.'/../routes/web.php';
+    }
+
     //Tương ứng với http method = get
     public static function get($path, $callback)
     {
@@ -24,12 +29,14 @@ class Route
     {
 
         $path = preg_replace('/\{.+?\}/', '(.+)', $path);
-        return $path;
+        return trim($path, '/');
     }
 
     public function execute()
     {
         $path = $this->getPath(); //Lấy path hiện tại
+
+
         $method = $this->getMethod(); //Lấy method hiện tại
         //echo $path.'<br/>';
         //echo $method;
@@ -42,6 +49,7 @@ class Route
         $params = [];
         if (!empty(self::$routes[$method])) {
             foreach (self::$routes[$method] as $key => $value) {
+
                 if (preg_match('~^'.$key.'$~i', $path, $matches)) {
                     $callback = self::$routes[$method][$key];
                     if (!empty($matches[1])) {
@@ -82,7 +90,7 @@ class Route
 
         $pathArr = explode($dirnamePublic, $requestUri);
 
-        $path = end($pathArr);
+        $path = trim(end($pathArr), '/');
 
         return $path;
 

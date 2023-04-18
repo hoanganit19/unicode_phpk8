@@ -1,8 +1,9 @@
 <?php
 
+use Core\App;
 use Core\Route;
 
-require_once __DIR__.'/../routes/web.php';
+define('BASE_ROOT', dirname(__DIR__));
 
-$route = new Route();
-$route->execute();
+$app = new App();
+$app->execute();
