@@ -5,24 +5,37 @@ namespace Core;
 class Route
 {
     public static $routes = [];
+    public static $routeObj = null;
+    public static $path = [];
+    public static $pathList = [];
+    public $request = null;
 
-    public function __construct()
+    public function __construct($request)
     {
+        self::$routeObj = $this;
+        $this->request = $request;
+        $this->request->setData();
+
         require_once __DIR__.'/../routes/web.php';
     }
 
     //Tương ứng với http method = get
     public static function get($path, $callback)
     {
+        self::$pathList[] = $path;
         $path = self::handlePath($path);
         self::$routes['get'][$path] = $callback;
 
+        return self::$routeObj;
     }
 
     public static function post($path, $callback)
     {
+        self::$pathList[] = $path;
         $path = self::handlePath($path);
         self::$routes['post'][$path] = $callback;
+
+        return self::$routeObj;
     }
 
     public static function handlePath($path)
@@ -34,16 +47,20 @@ class Route
 
     public function execute()
     {
-        $path = $this->getPath(); //Lấy path hiện tại
+        // echo '<pre>';
+        // print_r(self::$name);
+        // echo '</pre>';
+
+        $path = $this->request->getPath(); //Lấy path hiện tại
 
 
-        $method = $this->getMethod(); //Lấy method hiện tại
+        $method = $this->request->getMethod(); //Lấy method hiện tại
         //echo $path.'<br/>';
         //echo $method;
 
         //$routes[$method][$path] = $callback
         // echo '<pre>';
-        // print_r(self::$routes[$method]);
+        // print_r(self::$routes);
         // echo '</pre>';
         $callback = null;
         $params = [];
@@ -62,6 +79,8 @@ class Route
         unset($params[0]);
         $params = array_values($params);
 
+        //Thêm request vào params
+        $params = array_merge([$this->request], $params);
 
         if (!empty($callback)) {
             //$callback = self::$routes[$method][$path];
@@ -72,32 +91,35 @@ class Route
                 $controller = new $controllerName(); //Tạo object từ controller
                 echo call_user_func_array([$controller, $controllerAction], $params);
             } else {
-                echo call_user_func_array($callback, []);
+                echo call_user_func_array($callback, $params);
             }
 
         } else {
             require_once '../core/errors/404.php';
         }
 
+
     }
 
-    public function getPath()
+    public function name($name)
     {
-        $requestUri = parse_url($_SERVER['REQUEST_URI']);
-        $requestUri = $requestUri['path'];
-
-        $dirnamePublic = dirname($_SERVER['SCRIPT_NAME']);
-
-        $pathArr = explode($dirnamePublic, $requestUri);
-
-        $path = trim(end($pathArr), '/');
-
-        return $path;
-
+        self::$path[$name] = end(self::$pathList);
     }
 
-    public function getMethod()
+    public static function getUrl($name, $params=[])
     {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+
+        $protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $appUrl = $protocol.$_SERVER['HTTP_HOST'];
+        $fullUrl = $appUrl.'/'.self::$path[$name];
+        if (!empty($params)) {
+            foreach ($params as $key => $value) {
+                $fullUrl = str_replace('{'.$key.'}', $value, $fullUrl);
+            }
+        }
+
+        return $fullUrl;
     }
+
+
 }

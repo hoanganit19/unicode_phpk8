@@ -17,13 +17,13 @@ use App\Controllers\ProductController;
 //     return 'Thêm sản phẩm';
 // });
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/bao-cao', [HomeController::class, 'report']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/san-pham', [ProductController::class, 'index']);
+Route::get('san-pham/them', [ProductController::class, 'add'])->name('products-get');
 
-Route::get('/san-pham/sua/{id}/{slug}', [ProductController::class, 'edit']);
+Route::post('products/handle-add', [ProductController::class, 'handleAdd'])
+->name('products-post');
 
-Route::get('/flash-sales', function () {
-    View::render('flash-sales/index');
-});
+Route::get('test-1/{id}/{slug}', function ($id, $slug) {
+    return 'Test 1 - '.$id.' - '.$slug;
+})->name('test-1');
