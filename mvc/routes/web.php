@@ -2,6 +2,7 @@
 
 use Core\View;
 use Core\Route;
+use Core\Request;
 use App\Controllers\HomeController;
 use App\Controllers\ProductController;
 
@@ -21,9 +22,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('san-pham/them', [ProductController::class, 'add'])->name('products-get');
 
+Route::get('san-pham/sua/{id}/{slug}', [ProductController::class, 'edit']);
+
 Route::post('products/handle-add', [ProductController::class, 'handleAdd'])
 ->name('products-post');
 
-Route::get('test-1/{id}/{slug}', function ($id, $slug) {
-    return 'Test 1 - '.$id.' - '.$slug;
-})->name('test-1');
+Route::get('/test/{id}', function ($id, Request $request) {
+    echo $request->keyword.'<br/>';
+    echo $id.'<br/>';
+    return 'test';
+});

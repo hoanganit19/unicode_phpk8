@@ -4,6 +4,9 @@ namespace Core;
 
 class Request
 {
+    private $body = [];
+    private $path = null;
+
     public function __get($name)
     {
 
@@ -16,7 +19,7 @@ class Request
 
     public function all()
     {
-        return $_POST;
+        return $this->body;
     }
 
     public function getPath()
@@ -30,7 +33,9 @@ class Request
 
         $path = trim(end($pathArr), '/');
 
-        return $path;
+        $this->path = $path;
+
+        return $this->path;
 
     }
 
@@ -43,13 +48,13 @@ class Request
     {
         $method = $this->getMethod();
         if ($method == 'get') {
-            $data = $_GET;
+            $this->body = $_GET;
         } elseif ($method == 'post') {
-            $data = $_POST;
+            $this->body = $_POST;
         }
 
-        if (!empty($data)) {
-            foreach ($data as $key => $value) {
+        if (!empty($this->body)) {
+            foreach ($this->body as $key => $value) {
                 $this->{$key} = $value;
             }
         }

@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use ReflectionMethod;
+use ReflectionFunction;
+
 class Route
 {
     public static $routes = [];
@@ -80,7 +83,8 @@ class Route
         $params = array_values($params);
 
         //Thêm request vào params
-        $params = array_merge([$this->request], $params);
+        //$params = array_merge([$this->request], $params);
+
 
         if (!empty($callback)) {
             //$callback = self::$routes[$method][$path];
@@ -89,9 +93,47 @@ class Route
                 $controllerName = $callback[0];
                 $controllerAction = $callback[1];
                 $controller = new $controllerName(); //Tạo object từ controller
-                echo call_user_func_array([$controller, $controllerAction], $params);
+
+                //Lấy được thông tin các tham số của $controllerAction
+                $reflection = new ReflectionMethod($controllerName, $controllerAction);
+                $methodParams = $reflection->getParameters();
+
+                $paramFinal = [];
+
+                if (!empty($methodParams)) {
+                    $index = -1;
+                    foreach ($methodParams as $methodParam) {
+                        $paramType = (string)$methodParam->getType();
+
+                        if ($paramType == 'Core\Request') {
+                            $paramFinal[] = $this->request;
+                        } else {
+                            $index++;
+                            $paramFinal[] = $params[$index];
+                        }
+                    }
+                }
+
+                echo call_user_func_array([$controller, $controllerAction], $paramFinal);
             } else {
-                echo call_user_func_array($callback, $params);
+                $reflection = new ReflectionFunction($callback);
+                $arguments = $reflection->getParameters();
+                $paramFinal = [];
+                if (!empty($arguments)) {
+                    $index = -1;
+                    foreach ($arguments as $argument) {
+                        $paramType = (string)$argument->getType();
+
+                        if ($paramType == 'Core\Request') {
+                            $paramFinal[] = $this->request;
+                        } else {
+                            $index++;
+                            $paramFinal[] = $params[$index];
+                        }
+                    }
+                }
+
+                echo call_user_func_array($callback, $paramFinal);
             }
 
         } else {

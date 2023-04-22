@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Core\View;
 use Core\Request;
+use Core\Session;
+use Core\Validator;
 use Core\Controller;
 use App\Models\Products;
 
@@ -35,16 +37,49 @@ class ProductController extends Controller
 
     public function handleAdd(Request $request)
     {
+        //tên trường => danh sách rules
+        $rules = [
+            'name' => 'required|min:5|max:15',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|min:6|same:password'
+        ];
 
-        var_dump($request->email);
-        var_dump($request->password);
-        $request->abc = 'abc';
-        var_dump($request->abc);
+        //Tên rule => nội dung thông báo
+        $messages = [
+            'required' => ":attribute không được để trống",
+            'min' => ':attribute phải từ :min ký tự',
+            'max' => ':attribute không được lớn hơn :max ký tự',
+            'email' => ':attribute không đúng định dạng email',
+            'same' => ':attribute không khớp với mật khẩu'
+        ];
 
-        return 'Submit';
+        $attributes = [
+            'name' => 'Tên',
+            'email' => 'Email',
+            'password' => 'Mật khẩu',
+            'confirm_password' => 'Nhập lại mật khẩu'
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            $rules,
+            $messages,
+            $attributes
+        );
+
+        if ($validator->fails()) {
+            redirect('/san-pham/them');
+        } else {
+            echo 'Validate thành công';
+            //Thực hiện thêm vào database
+        }
+
+
+
     }
 
-    public function edit($id, $slug)
+    public function edit(Request $request, $id, $slug)
     {
         echo 'Sửa sản phẩm: '.$id.' - '.$slug;
     }
