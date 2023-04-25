@@ -4,8 +4,9 @@ namespace Core;
 
 use Exception;
 use Core\Session;
+use Core\Interfaces\ValidatorInterface;
 
-class Validator
+class Validator implements ValidatorInterface
 {
     private static $messages = [];
     private static $body = [];

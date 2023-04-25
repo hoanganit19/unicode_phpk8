@@ -18,7 +18,8 @@ class ProductController extends Controller
         //Xử lý logic
         //echo 'Danh sách sản phẩm';
 
-        $products = Products::all(); //Đọc dữ liệu từ model
+        $productModel = new Products();
+        $products = $productModel->getProducts();
 
         $title = 'Unicode Academy';
 
@@ -31,7 +32,7 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-        echo $request->keyword.'<br/>';
+
         $this->view('products/add');
     }
 
@@ -61,20 +62,25 @@ class ProductController extends Controller
             'confirm_password' => 'Nhập lại mật khẩu'
         ];
 
-        $validator = Validator::make(
-            $request->all(),
-            $rules,
-            $messages,
-            $attributes
-        );
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     $rules,
+        //     $messages,
+        //     $attributes
+        // );
 
-        if ($validator->fails()) {
-            redirect('/san-pham/them');
-        } else {
-            echo 'Validate thành công';
-            //Thực hiện thêm vào database
-        }
+        // if ($validator->fails()) {
+        //     redirect('/san-pham/them');
+        // } else {
+        //     echo 'Validate thành công';
+        //     //Thực hiện thêm vào database
+        // }
 
+        $request->validate($rules, $messages, $attributes);
+        //Nếu passes phương thức validate => Chạy đoạn code phía dưới
+        //Nếu fails => Back về request trước đó
+
+        return 'Submit';
 
 
     }

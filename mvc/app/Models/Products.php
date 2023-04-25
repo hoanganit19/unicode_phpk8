@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-class Products
+use Core\Model;
+
+class Products extends Model
 {
     //Đọc dữ liệu từ database
-    public static function all()
+    public function getProducts()
     {
-        return [
-            'Product 1',
-            'Product 2',
-            'Product 3'
-        ];
+        return $this->get('SELECT * FROM products');
     }
 }

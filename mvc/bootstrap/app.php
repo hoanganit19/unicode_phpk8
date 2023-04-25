@@ -2,10 +2,13 @@
 
 use Core\App;
 use Core\Route;
-use Core\Session;
+use Dotenv\Dotenv;
 
 define('BASE_ROOT', dirname(__DIR__));
-Session::start();
+
+$dotenv = Dotenv::createImmutable(BASE_ROOT);
+$dotenv->safeLoad();
+
 $app = new App();
 
 $app->execute();

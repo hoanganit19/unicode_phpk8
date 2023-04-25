@@ -20,7 +20,9 @@ use App\Controllers\ProductController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('san-pham/them', [ProductController::class, 'add'])->name('products-get');
+Route::get('san-pham', [ProductController::class, 'index']);
+
+Route::get('products/add', [ProductController::class, 'add'])->name('products-get');
 
 Route::get('san-pham/sua/{id}/{slug}', [ProductController::class, 'edit']);
 

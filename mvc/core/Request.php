@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Validator;
+
 class Request
 {
     private $body = [];
@@ -60,8 +62,13 @@ class Request
         }
     }
 
-    public function validate()
+    public function validate($rules, $messages, $attributes=[])
     {
-
+        $validator = Validator::make($this->body, $rules, $messages, $attributes);
+        if ($validator->fails()) {
+            if (!empty($_SERVER['HTTP_REFERER'])) {
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        }
     }
 }
