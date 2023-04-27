@@ -3,6 +3,7 @@
 use Core\View;
 use Core\Route;
 use Core\Request;
+use Core\Database\DB;
 use App\Controllers\HomeController;
 use App\Controllers\ProductController;
 
@@ -29,8 +30,11 @@ Route::get('san-pham/sua/{id}/{slug}', [ProductController::class, 'edit']);
 Route::post('products/handle-add', [ProductController::class, 'handleAdd'])
 ->name('products-post');
 
-Route::get('/test/{id}', function ($id, Request $request) {
-    echo $request->keyword.'<br/>';
-    echo $id.'<br/>';
-    return 'test';
+Route::get('/test-database', function () {
+    // $db = new DB();
+    // $user = $db->get('SELECT * FROM users');
+    // // $user = DB::get('SELECT * FROM users');
+    // echo '<pre>';
+    // print_r($user);
+    // echo '</pre>';
 });

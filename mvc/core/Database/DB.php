@@ -1,10 +1,8 @@
 <?php
-
-namespace Core;
-
+namespace Core\Database;
 use Core\Database\Database;
 
-class Model
+class DB
 {
     use Database;
 }

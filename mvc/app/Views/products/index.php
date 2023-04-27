@@ -1,3 +1,8 @@
+@extends('layouts/client')
+@section('title')
+Sản phẩm
+@endsection
+@section('content')
 <h1>Danh sách sản phẩm</h1>
 <h2> {{ $title ?? 'Không xác định' }} </h2>
 <h2>
@@ -11,8 +16,10 @@
 <div>
     {!! $content !!}
 </div>
+@endsection
 
-@foreach ($products as $index => $product)
-<h3>{{$product}}</h3>
-<h3>{{'Index = '.$index}}</h3>
-@endforeach
+@section('scripts')
+<script>
+//viết gì thì viết
+</script>
+@endsection

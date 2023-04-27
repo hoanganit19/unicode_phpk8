@@ -21,6 +21,7 @@ class ProductController extends Controller
         $productModel = new Products();
         $products = $productModel->getProducts();
 
+
         $title = 'Unicode Academy';
 
         $content = '<h3>Nội duing bài viết</h3>';
@@ -32,16 +33,17 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-
-        $this->view('products/add');
+        $title = 'Unicode Academy';
+        $this->view('products/add', compact('title'));
     }
 
     public function handleAdd(Request $request)
     {
+        $id = 19;
         //tên trường => danh sách rules
         $rules = [
             'name' => 'required|min:5|max:15',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'confirm_password' => 'required|min:6|same:password'
         ];
@@ -52,7 +54,8 @@ class ProductController extends Controller
             'min' => ':attribute phải từ :min ký tự',
             'max' => ':attribute không được lớn hơn :max ký tự',
             'email' => ':attribute không đúng định dạng email',
-            'same' => ':attribute không khớp với mật khẩu'
+            'same' => ':attribute không khớp với mật khẩu',
+            'unique' => ':attribute đã tồn tại, vui lòng chọn email khác'
         ];
 
         $attributes = [

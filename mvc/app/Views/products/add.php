@@ -1,3 +1,11 @@
+@extends('layouts/client')
+
+@section('title')
+Thêm sản phẩm
+@endsection
+
+@section('content')
+
 <form action="{{route('products-post')}}" method="post">
     <div>
         <label for="">Name</label>
@@ -21,3 +29,18 @@
     </div>
     <button type="submit">Submit</button>
 </form>
+@endsection
+
+@section('scripts')
+<script>
+console.log('Xin chào Unicode');
+</script>
+@endsection
+
+@section('style')
+<style>
+h1 {
+    color: red;
+}
+</style>
+@endsection

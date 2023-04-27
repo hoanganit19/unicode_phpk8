@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Template;
+
 class View
 {
     public static function render($path, $data = [])
@@ -10,13 +12,7 @@ class View
 
         $contentView = self::getView($path);
 
-        $contentView = preg_replace('~{{\s*(.+?)\s*}}~s', '<?php echo htmlentities($1); ?>', $contentView);
-
-        $contentView = preg_replace('~{!!\s*(.+?)\s*!!}~s', '<?php echo $1; ?>', $contentView);
-
-        $contentView = preg_replace('~@foreach\s*(\(.+?\))~s', '<?php foreach $1: ?>', $contentView);
-
-        $contentView = preg_replace('~@endforeach~s', '<?php endforeach;  ?>', $contentView);
+        $contentView = Template::run($contentView);
 
         eval('?> '.$contentView.' <?php');
     }

@@ -68,3 +68,35 @@ Bài tập:
 - Code lại bài học hnay
 - Rà soát lại code => Chỗ nào không hiểu hỏi
 - Ôn tập: Abstract class, Interface
+
+Lưu ý khi làm việc với Model
+
+- 1 model sẽ tương ứng với 1 table
+- 1 controller có thể có nhiều model
+
+Tổng quan:
+
+1 controller
+
+- 1 hoặc nhiều model (Mỗi model tương ứng với 1 table)
+- Nhiều view (Mỗi action tương ứng với 1 view): View thường đặt trong folder
+
+## Dự án phần PHP
+
+Xây dựng blog cá nhân sử dụng mô hình MVC
+
+1. Client
+
+- Hiển thị danh sách bài viết
+- Hiển thị danh sách bài viết theo chuyên mục
+- Hiển thị chi tiết bài viết
+- Comment bài viết
+- Tìm kiếm bài viết
+- API
+
+2. Back-End
+
+- Đăng nhập quản trị
+- Quản lý chuyên mục: Đa cấp
+- Quản lý bài viết: Tích hợp Filemanager, Editor đăng bài
+- Phân quyền người dùng

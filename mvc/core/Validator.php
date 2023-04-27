@@ -4,6 +4,7 @@ namespace Core;
 
 use Exception;
 use Core\Session;
+use Core\Database\DB;
 use Core\Interfaces\ValidatorInterface;
 
 class Validator implements ValidatorInterface
@@ -77,6 +78,31 @@ class Validator implements ValidatorInterface
                                     if (isset($request[$field]) && isset($request[$ruleValue]) && $request[$field]!=$request[$ruleValue]) {
                                         //Xảy ra lỗi
                                         self::setMessage($messages[$ruleName], $attributes, $field);
+                                    }
+                                }
+
+                                //Xử lý unique
+                                if ($ruleName == 'unique' && isset($request[$field])) {
+                                    $ruleValueArr = array_filter(explode(',', $ruleValue));
+                                    if (!empty($ruleValueArr)) {
+                                        $tableName = $ruleValueArr[0];
+                                        $fieldName = $ruleValueArr[1];
+
+                                        $sql = "SELECT * FROM $tableName WHERE $fieldName=?";
+
+                                        $data = [$request[$field]];
+
+                                        if (!empty($ruleValueArr[2])) {
+                                            $ignoreValue = $ruleValueArr[2];
+                                            $sql = "SELECT * FROM $tableName WHERE $fieldName=? AND id!=?";
+                                            $data[] = $ignoreValue;
+                                        }
+
+
+                                        $rows = DB::count($sql, $data);
+                                        if (!empty($rows)) {
+                                            self::setMessage($messages[$ruleName], $attributes, $field);
+                                        }
                                     }
                                 }
                             }
