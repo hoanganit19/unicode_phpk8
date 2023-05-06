@@ -75,7 +75,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Đăng nhập dưới:</div>
-            Hoàng An Unicode
+            {{App\Core\Auth::user()->name}}
         </div>
     </nav>
 </div>

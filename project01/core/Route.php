@@ -85,7 +85,7 @@ class Route
         //Thêm request vào params
         //$params = array_merge([$this->request], $params);
 
-
+        //Gọi vào controller tương ứng
         if (!empty($callback)) {
             //$callback = self::$routes[$method][$path];
             //execute callback

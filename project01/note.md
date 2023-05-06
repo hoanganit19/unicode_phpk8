@@ -130,3 +130,20 @@
 ### Ghép giao diện Client
 
 Middleware => Lớp trung gian giữa route và controller
+
+Route => Middleware => Controller
+
+- File cấu hình Middleware
+- Sử dụng file config/app.php
+
+Chức năng ghi nhớ mật khẩu
+
+- Dùng cookie để lưu phiên đăng nhập
+- Cookie được lưu trữ ở trình duyệt => Dễ bị lộ thông tin => Không an toàn
+- Nếu user trên database bị xóa => Cookie vẫn tồn tại => Phiên đăng nhập vẫn còn => Vô lý
+
+=> Chỉ lưu token: Tạm đặt tên là remember_token
+
+- Khi đăng nhập => Tạo token
+- Lưu token vào trong Cookie và Database
+- Khi muốn lấy thông tin đăng nhập, trạng thái đăng nhập => truy vấn tới database dựa vào remember_token

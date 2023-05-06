@@ -71,4 +71,24 @@ class Request
             }
         }
     }
+
+    public function is($path)
+    {
+        //$request->is('admin') => Check đường dẫn admin
+        //$request->is('admin/*') => Check tất cả đường dẫn có tiền tố là admin
+        $check = false;
+        if (strpos($path, '*')!==false) {
+            //Check đường dẫn con
+            $path = str_replace('*', '.*', $path);
+            if (preg_match('~'.$path.'~i', $this->getPath())) {
+                $check = true;
+            }
+        } else {
+            if ($this->getPath() == $path) {
+                $check = true;
+            }
+        }
+
+        return $check;
+    }
 }

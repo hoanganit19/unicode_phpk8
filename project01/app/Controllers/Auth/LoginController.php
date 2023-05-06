@@ -2,8 +2,11 @@
 
 namespace App\Controllers\Auth;
 
+use Core\Cookie;
 use Core\Request;
 use Core\Session;
+use App\Core\Auth;
+use Carbon\Carbon;
 use App\Models\User;
 use Core\Controller;
 
@@ -50,7 +53,23 @@ class LoginController extends Controller
         if (!empty($user)) {
             $hash = $user['password'];
             if (password_verify($request->password, $hash)) {
-                Session::put('userLogin', $user);
+
+                if ($request->remember) {
+                    //Tạo token
+                    $token = md5(uniqid());
+
+                    //Set cookie
+                    Cookie::put('rememberToken', $token, 1440);
+
+                    //Update token vào Database
+                    $this->userModel->updateById([
+                        'remember_token' => $token,
+                        'updated_at' => Carbon::now()
+                    ], $user['id']);
+
+                }
+
+                Auth::setLogin($user);
                 redirect(route('admin.index'));
             } else {
                 Session::put('msg', 'Email hoặc mật khẩu không chính xác');
@@ -59,5 +78,11 @@ class LoginController extends Controller
         }
 
 
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        redirect(route('login'));
     }
 }

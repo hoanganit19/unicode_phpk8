@@ -19,7 +19,7 @@
                 <span class="text-danger">{{error('password')}}</span>
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                <input class="form-check-input" id="inputRememberPassword" name="remember" type="checkbox" value="1" />
                 <label class="form-check-label" for="inputRememberPassword">Remember
                     Password</label>
             </div>

@@ -14,4 +14,17 @@ class User extends Model
 
         return $user;
     }
+
+    public function updateById($attributes, $id)
+    {
+        $condition = "id = $id";
+        return $this->update($this->table, $attributes, $condition);
+    }
+
+    public function getUser($field = 'id', $value)
+    {
+        $user = $this->first("SELECT * FROM $this->table WHERE $field = ?", [$value]);
+        return $user;
+    }
+
 }

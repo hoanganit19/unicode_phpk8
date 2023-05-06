@@ -24,6 +24,19 @@ class App
         $request = new Request();
 
         $this->route = new Route($request);
+
+        //Thực thi Middleware
+        $middlewares = config('app.middleware');
+        if (!empty($middlewares)) {
+            foreach ($middlewares as $middleware) {
+                $middlewareObj = new $middleware();
+                $status = $middlewareObj->handle($request);
+                if (!$status) {
+                    die('Can\'t next request');
+                }
+            }
+        }
+
         $this->route->execute();
 
     }
