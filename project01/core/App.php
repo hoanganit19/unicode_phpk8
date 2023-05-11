@@ -23,6 +23,14 @@ class App
 
         $request = new Request();
 
+        //Alias Class
+        $aliasClass = config('app.alias');
+        if (!empty($aliasClass)) {
+            foreach ($aliasClass as $key => $value) {
+                class_alias($value, $key);
+            }
+        }
+
         $this->route = new Route($request);
 
         //Thực thi Middleware

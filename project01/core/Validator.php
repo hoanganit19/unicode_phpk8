@@ -157,6 +157,13 @@ class Validator implements ValidatorInterface
     {
         return self::isValidate();
     }
+
+    public static function pushError($field, $message)
+    {
+        self::$messages[$field][] = $message;
+        Session::put('errors', self::$messages);
+        Session::put('old', self::$body);
+    }
 }
 
 /*

@@ -8,5 +8,10 @@ return [
     'middleware' => [
         AuthMiddleware::class,
         GuestMiddleware::class
+    ],
+    'alias' => [
+        'Auth' => \App\Core\Auth::class,
+        'Cookie' => \Core\Cookie::class,
+        'Session' => \Core\Session::class
     ]
 ];

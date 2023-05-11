@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Core\Cookie;
 use Core\Request;
 use Core\Session;
-use App\Core\Auth;
+use Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use Core\Controller;
@@ -50,8 +50,11 @@ class LoginController extends Controller
             $request->email
         );
 
+
+
         if (!empty($user)) {
             $hash = $user['password'];
+
             if (password_verify($request->password, $hash)) {
 
                 if ($request->remember) {
@@ -75,6 +78,9 @@ class LoginController extends Controller
                 Session::put('msg', 'Email hoặc mật khẩu không chính xác');
                 redirect(route('login'));
             }
+        } else {
+            Session::put('msg', 'Email hoặc mật khẩu không chính xác');
+            redirect(route('login'));
         }
 
 
