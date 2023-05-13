@@ -42,13 +42,19 @@ trait Database
         //truy vấn lấy danh sách trong database
         $statement = $this->query($sql, $data, false);
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $data = array_map(function ($item) {
+            return (object)$item;
+        }, $data);
+
+        return $data;
     }
 
     private function first($sql, $data = [])
     {
         $statement = $this->query($sql, $data, false);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return (object)$statement->fetch(PDO::FETCH_ASSOC);
     }
 
     private function create($table, $attributes = [])

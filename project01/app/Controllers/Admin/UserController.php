@@ -17,6 +17,129 @@ class UserController extends Controller
     {
         $this->user = new User();
     }
+
+    public function index()
+    {
+        $pageTitle = 'Danh sách người dùng';
+        $msg = Session::getFlash('msg');
+
+        $users = $this->user->getUsers();
+
+        $this->view('admin/users/lists', compact('pageTitle', 'msg', 'users'));
+    }
+
+    public function add()
+    {
+        $pageTitle = 'Thêm người dùng';
+        $msg = Session::getFlash('msg');
+        $this->view('admin/users/add', compact('pageTitle', 'msg'));
+    }
+
+    public function handleAdd(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|min:6|same:password'
+          ], [
+              'required' => ':attribute không được để trống',
+              'email' => ':attribute không đúng định dạng',
+              'unique' => ':attribute đã có người sử dụng',
+              'min' => ':attribute phải từ :min ký tự',
+              'same' => ':attribute không khớp'
+          ], [
+              'name' => 'Tên',
+              'email' => 'Email',
+              'password' => 'Mật khẩu',
+              'confirm_password' => 'Nhập lại mật khẩu'
+          ]);
+
+        //Xử lý thêm
+        $attributes = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'status' => $request->status,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+
+        $this->user->addUser($attributes);
+
+        Session::put('msg', 'Thêm người dùng thành công');
+
+        redirect(route('admin.users.index'));
+    }
+
+    public function edit($id)
+    {
+        $pageTitle = 'Sửa người dùng';
+        $msg = Session::getFlash('msg');
+        $user = $this->user->getUser('id', $id);
+        $this->view('admin/users/edit', compact('pageTitle', 'msg', 'user'));
+    }
+
+    public function handleEdit(Request $request, $id)
+    {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+        ];
+
+        $attributes = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'status' => $request->status,
+            'updated_at' => Carbon::now()
+        ];
+
+        if ($request->password) {
+            $rulePassword = [
+                'password' => 'min:6',
+                'confirm_password' => 'required|min:6|same:password'
+            ];
+
+            $rules = array_merge($rules, $rulePassword);
+
+            $attributes['password'] = password_hash($request->password, PASSWORD_DEFAULT);
+
+        }
+
+        $request->validate($rules, [
+              'required' => ':attribute không được để trống',
+              'email' => ':attribute không đúng định dạng',
+              'unique' => ':attribute đã có người sử dụng',
+              'min' => ':attribute phải từ :min ký tự',
+              'same' => ':attribute không khớp'
+          ], [
+              'name' => 'Tên',
+              'email' => 'Email',
+              'password' => 'Mật khẩu',
+              'confirm_password' => 'Nhập lại mật khẩu'
+          ]);
+
+        //Update
+        $this->user->updateById($attributes, $id);
+
+        Session::put('msg', 'Cập nhật người dùng thành công');
+
+        redirect(route('admin.users.edit', ['id' => $id]));
+
+    }
+
+    public function delete($id)
+    {
+        if (Auth::user()->id != $id) {
+            $this->user->deleteUser($id);
+            Session::put('msg', 'Xóa người dùng thành công');
+        } else {
+            Session::put('msg', 'Không được xóa vì tài khoản này đang đăng nhập');
+        }
+
+        redirect(route('admin.users.index'));
+    }
+
     public function profile()
     {
         $user = Auth::user();
@@ -37,10 +160,11 @@ class UserController extends Controller
         ], [
             'required' => ':attribute không được để trống',
             'email' => ':attribute không đúng định dạng',
-            'unique' => ':attribute đã có người sử dụng'
+            'unique' => ':attribute đã có người sử dụng',
+
         ], [
             'name' => 'Tên',
-            'email' => 'Email'
+            'email' => 'Email',
         ]);
 
         //Update
@@ -119,4 +243,15 @@ class UserController extends Controller
             redirect(route('admin.user.password'));
         }
     }
+
+    public function deletes(Request $request)
+    {
+        if ($request->ids) {
+            $this->user->deleteUsers($request->ids);
+            Session::put('msg', 'Xóa người dùng thành công');
+            redirect(route('admin.users.index'));
+        }
+    }
 }
+
+//Where id in(1,4,6)

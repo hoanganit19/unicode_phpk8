@@ -24,6 +24,19 @@ Route::get('/admin/change-password', [UserController::class, 'changePassword'])-
 
 Route::post('/admin/change-password', [UserController::class, 'handleChangePassword']);
 
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+
+Route::get('/admin/users/add', [UserController::class, 'add'])->name('admin.users.add');
+
+Route::post('/admin/users/add', [UserController::class, 'handleAdd']);
+
+Route::get('/admin/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+
+Route::post('/admin/users/edit/{id}', [UserController::class, 'handleEdit']);
+
+Route::post('/admin/users/delete/{id}', [UserController::class, 'delete'])->name('admin.users.delete');
+
+Route::post('/admin/users/deletes', [UserController::class, 'deletes'])->name('admin.users.deletes');
 
 //Clients
 Route::get('/', function () {

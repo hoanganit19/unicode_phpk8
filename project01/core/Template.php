@@ -36,6 +36,10 @@ class Template
 
         $contentView = preg_replace('~{!!\s*(.+?)\s*!!}~s', '<?php echo $1; ?>', $contentView);
 
+        $contentView = preg_replace('~@if\s*\((.+?)\s*\)\s*$~m', '<?php if ($1): ?>', $contentView);
+
+        $contentView = preg_replace('~@endif~s', '<?php endif;  ?>', $contentView);
+
         $contentView = preg_replace('~@foreach\s*(\(.+?\))~s', '<?php foreach $1: ?>', $contentView);
 
         $contentView = preg_replace('~@endforeach~s', '<?php endforeach;  ?>', $contentView);
