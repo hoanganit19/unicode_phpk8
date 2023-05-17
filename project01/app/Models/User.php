@@ -8,9 +8,14 @@ class User extends Model
 {
     protected $table = 'users';
 
-    public function getUsers()
+    public function getUsers($filters)
     {
-        return $this->get("SELECT * FROM users ORDER BY created_at DESC");
+        $where = $this->buildWhere($filters);
+        $sql = "SELECT * FROM users $where ORDER BY created_at DESC";
+
+        $users = $this->paginate($sql, config('paginate.admin'));
+
+        return $users;
     }
 
     public function addUser($attributes)

@@ -18,14 +18,32 @@ class UserController extends Controller
         $this->user = new User();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $pageTitle = 'Danh sách người dùng';
         $msg = Session::getFlash('msg');
 
-        $users = $this->user->getUsers();
+        $filters = [];
 
-        $this->view('admin/users/lists', compact('pageTitle', 'msg', 'users'));
+        //html injection
+        if ($request->status == 'active' || $request->status == 'inactive') {
+            $status = $request->status == 'active' ? 1 : 0;
+            $filters['status'] = $status;
+        }
+
+        if ($request->query) {
+            $filters[''] = "email LIKE '%{$request->query}%' OR name LIKE '%{$request->query}%'";
+        }
+
+        //status = 1 AND (email LIKE '%%' OR name LIKE '%%')
+
+        $users = $this->user->getUsers($filters);
+
+        $links = $this->user->links($users);
+
+        $users = $users['data'];
+
+        $this->view('admin/users/lists', compact('pageTitle', 'msg', 'users', 'links'));
     }
 
     public function add()

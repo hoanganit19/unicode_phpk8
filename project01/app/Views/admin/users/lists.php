@@ -4,7 +4,25 @@
 {!!showMsg($msg)!!}
 
 <p><a href="{{route('admin.users.add')}}" class="btn btn-primary">Thêm</a></p>
-
+<form action="">
+    <div class="row mb-3">
+        <div class="col-3">
+            <select name="status" class="form-select" id="">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="active" {{request()->status == 'active' ? 'selected': false}}>Kích hoạt</option>
+                <option value="inactive" {{request()->status == 'inactive' ? 'selected': false}}>Chưa kích hoạt</option>
+            </select>
+        </div>
+        <div class="col-7">
+            <input type="search" class="form-control" name="query" placeholder="Từ khóa..."
+                value="{{request('query')}}" />
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            <a href="{{route('admin.users.index')}}" class="btn btn-danger">&times;</a>
+        </div>
+    </div>
+</form>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -58,7 +76,8 @@
         {{view('admin/includes/deletes', ['action' => route('admin.users.deletes')])}}
     </div>
     <div class="col-6">
-        {{view('admin/includes/paginations', ['align'=>'end'])}}
+        {{view('admin/includes/paginations', ['align'=>'end', 'links' => $links])}}
+
     </div>
 </div>
 {{view('admin/includes/delete')}}
