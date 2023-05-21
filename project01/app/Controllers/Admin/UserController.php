@@ -39,7 +39,7 @@ class UserController extends Controller
 
         $users = $this->user->getUsers($filters);
 
-        $links = $this->user->links($users);
+        $links = $this->user->links($users, true);
 
         $users = $users['data'];
 

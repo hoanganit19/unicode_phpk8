@@ -36,19 +36,8 @@
                     </nav>
                 </div>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                    aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Trang
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePages" aria-labelledby="headingOne"
-                    data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="#">Danh sách</a>
-                        <a class="nav-link" href="#">Thêm mới</a>
-                    </nav>
-                </div>
+
+                {{view('layouts/admin/menu_item', ['title' => 'Trang', 'name' => 'pages'])}}
 
                 {{view('layouts/admin/menu_item', ['title' => 'Người dùng', 'name' => 'users'])}}
                 <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

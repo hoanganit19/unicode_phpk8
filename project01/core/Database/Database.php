@@ -53,7 +53,9 @@ trait Database
 
     private function first($sql, $data = [])
     {
+
         $statement = $this->query($sql, $data, false);
+
         return (object)$statement->fetch(PDO::FETCH_ASSOC);
     }
 

@@ -91,4 +91,9 @@ class Request
 
         return $check;
     }
+
+    public function getParams()
+    {
+        return !empty($_SERVER['QUERY_STRING']) ? trim($_SERVER['QUERY_STRING']) : null;
+    }
 }

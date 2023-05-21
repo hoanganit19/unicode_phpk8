@@ -24,6 +24,7 @@ class LoginController extends Controller
 
     public function getForm()
     {
+
         // if (Session::get('userLogin')) {
         //     redirect(route('admin.index'));
         // }
@@ -51,9 +52,9 @@ class LoginController extends Controller
         );
 
 
-
         if (!empty($user)) {
             $hash = $user->password;
+
 
             if (password_verify($request->password, $hash)) {
 

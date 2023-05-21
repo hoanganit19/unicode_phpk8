@@ -8,7 +8,7 @@ class Model
 {
     use Database;
 
-    public function paginate($sql, $limit)
+    protected function paginate($sql, $limit)
     {
         $count = $this->count($sql);
 
@@ -34,8 +34,10 @@ class Model
         ];
     }
 
-    public function links($lists)
+    protected function links($lists, $isParams = false)
     {
+        $params = $isParams ? $this->getQueryString() : null;
+
         $paginate = $lists['paginate'];
         //Max page
         $maxPage = $paginate['maxPage'];
@@ -47,17 +49,17 @@ class Model
         if ($currentPage>1) {
             $prevPage = $currentPage-1;
 
-            $html.='<li class="page-item"><a class="page-link" href="?page='.$prevPage.'">Trước</a></li>';
+            $html.='<li class="page-item"><a class="page-link" href="?page='.$prevPage.$params.'">Trước</a></li>';
         }
 
         for ($page = 1; $page <= $maxPage; $page++) {
             $active = $page == $currentPage ? ' active' : '';
-            $html.='<li class="page-item'.$active.'"><a class="page-link" href="?page='.$page.'">'.$page.'</a></li>';
+            $html.='<li class="page-item'.$active.'"><a class="page-link" href="?page='.$page.$params.'">'.$page.'</a></li>';
         }
 
         if ($currentPage < $maxPage) {
             $nextPage = $currentPage+1;
-            $html.='<li class="page-item"><a class="page-link" href="?page='.$nextPage.'">Sau</a></li>';
+            $html.='<li class="page-item"><a class="page-link" href="?page='.$nextPage.$params.'">Sau</a></li>';
         }
 
         $html.='</ul>';
@@ -65,7 +67,7 @@ class Model
         return $html;
     }
 
-    public function buildWhere($filters)
+    protected function buildWhere($filters)
     {
         $where = [];
         if (!empty($filters)) {
@@ -91,8 +93,21 @@ class Model
         return $where;
     }
 
-    public function __call($method, $args = [])
+    private function getQueryString()
     {
-        echo $method;
+        $queryArr = [];
+        $query = request()->getParams();
+        if (!empty($query)) {
+            $queryArr = explode('&', $query);
+            $currentPage = request()->page; //Lấy current page không xử lý
+            $key = array_search('page='.$currentPage, $queryArr);
+            if ($key!==false) {
+                unset($queryArr[$key]);
+            }
+
+        }
+
+        return !empty($queryArr) ? '&'.implode('&', $queryArr) : null;
     }
+
 }

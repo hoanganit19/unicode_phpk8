@@ -7,6 +7,8 @@
 // Scripts
 //
 
+import { toSlug } from "./functions.js";
+
 window.addEventListener("DOMContentLoaded", (event) => {
   // Toggle the side navigation
   const sidebarToggle = document.body.querySelector("#sidebarToggle");
@@ -110,5 +112,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
       });
     });
+  }
+
+  //Test slug
+  const titleNode = document.querySelector(".title");
+  const slugNode = document.querySelector(".slug");
+
+  if (titleNode !== null && slugNode !== null) {
+    let title = titleNode.value;
+
+    titleNode.addEventListener("change", (e) => {
+      title = e.target.value;
+      const slug = toSlug(title);
+      if (slug.length && !slugNode.value.length) {
+        slugNode.value = slug;
+      }
+    });
+
+    slugNode.addEventListener("change", (e) => {
+      if (title.length && !e.target.value.length) {
+        const slug = toSlug(title);
+        slugNode.value = slug;
+      }
+    });
+  }
+
+  const path = window.location.pathname;
+
+  if (path.indexOf("add") !== -1 || path.indexOf("edit") !== -1) {
+    document.body.onbeforeunload = function () {
+      return "Ok";
+    };
   }
 });

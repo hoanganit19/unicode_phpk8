@@ -2,6 +2,7 @@
 
 use Core\View;
 use Core\Route;
+use App\Controllers\Admin\PageController;
 use App\Controllers\Admin\UserController;
 use App\Controllers\Auth\LoginController;
 use App\Controllers\Admin\DashboardController;
@@ -24,6 +25,7 @@ Route::get('/admin/change-password', [UserController::class, 'changePassword'])-
 
 Route::post('/admin/change-password', [UserController::class, 'handleChangePassword']);
 
+//Users
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
 
 Route::get('/admin/users/add', [UserController::class, 'add'])->name('admin.users.add');
@@ -38,7 +40,26 @@ Route::post('/admin/users/delete/{id}', [UserController::class, 'delete'])->name
 
 Route::post('/admin/users/deletes', [UserController::class, 'deletes'])->name('admin.users.deletes');
 
+//Page
+Route::get('/admin/pages', [PageController::class, 'index'])->name('admin.pages.index');
+
+Route::get('/admin/pages/add', [PageController::class, 'add'])->name('admin.pages.add');
+
+Route::post('/admin/pages/add', [PageController::class, 'handleAdd']);
+
+Route::get('/admin/pages/edit/{id}', [PageController::class, 'edit'])->name('admin.pages.edit');
+
+Route::post('/admin/pages/edit/{id}', [PageController::class, 'handleEdit']);
+
+Route::post('/admin/pages/delete/{id}', [PageController::class, 'delete'])->name('admin.pages.delete');
+
+Route::post('/admin/pages/deletes', [PageController::class, 'deletes'])->name('admin.pages.deletes');
+
 //Clients
 Route::get('/', function () {
-    return 'Welcome PHPk8';
+    echo env('DB_NAME');
 });
+
+Route::get('/{slug}.html', function ($slug) {
+    return 'Trang = '.$slug;
+})->name('page');
