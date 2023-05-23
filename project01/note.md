@@ -147,3 +147,14 @@ Chức năng ghi nhớ mật khẩu
 - Khi đăng nhập => Tạo token
 - Lưu token vào trong Cookie và Database
 - Khi muốn lấy thông tin đăng nhập, trạng thái đăng nhập => truy vấn tới database dựa vào remember_token
+
+Thời sự
+-- Chính trị
+--|-- Chính quyền
+--|-- Pháp luật
+
+Lỗi truy vấn Database
+
+Query N + 1
+
+Khắc phục bằng: Eager loading

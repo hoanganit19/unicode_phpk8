@@ -3,8 +3,10 @@
 use Core\View;
 use Core\Route;
 use App\Controllers\Admin\PageController;
+use App\Controllers\Admin\PostController;
 use App\Controllers\Admin\UserController;
 use App\Controllers\Auth\LoginController;
+use App\Controllers\Admin\CategoryController;
 use App\Controllers\Admin\DashboardController;
 
 //Auth
@@ -55,6 +57,36 @@ Route::post('/admin/pages/delete/{id}', [PageController::class, 'delete'])->name
 
 Route::post('/admin/pages/deletes', [PageController::class, 'deletes'])->name('admin.pages.deletes');
 
+//Categories
+Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+
+Route::get('/admin/categories/add', [CategoryController::class, 'add'])->name('admin.categories.add');
+
+Route::post('/admin/categories/add', [CategoryController::class, 'handleAdd']);
+
+Route::get('/admin/categories/edit/{id}', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+
+Route::post('/admin/categories/edit/{id}', [CategoryController::class, 'handleEdit']);
+
+Route::post('/admin/categories/delete/{id}', [CategoryController::class, 'delete'])->name('admin.categories.delete');
+
+Route::post('/admin/categories/deletes', [CategoryController::class, 'deletes'])->name('admin.categories.deletes');
+
+//Posts
+Route::get('/admin/posts', [PostController::class, 'index'])->name('admin.posts.index');
+
+Route::get('/admin/posts/add', [PostController::class, 'add'])->name('admin.posts.add');
+
+Route::post('/admin/posts/add', [PostController::class, 'handleAdd']);
+
+Route::get('/admin/posts/edit/{id}', [PostController::class, 'edit'])->name('admin.posts.edit');
+
+Route::post('/admin/posts/edit/{id}', [PostController::class, 'handleEdit']);
+
+Route::post('/admin/posts/delete/{id}', [PostController::class, 'delete'])->name('admin.posts.delete');
+
+Route::post('/admin/posts/deletes', [PostController::class, 'deletes'])->name('admin.posts.deletes');
+
 //Clients
 Route::get('/', function () {
     echo env('DB_NAME');
@@ -63,3 +95,11 @@ Route::get('/', function () {
 Route::get('/{slug}.html', function ($slug) {
     return 'Trang = '.$slug;
 })->name('page');
+
+Route::get('/chuyen-muc/{slug}.html', function ($slug) {
+    return 'Chuyên mục = '.$slug;
+})->name('categories');
+
+Route::get('/bai-viet/{slug}.html', function ($slug) {
+    return 'Bài viết = '.$slug;
+})->name('posts');
