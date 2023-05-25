@@ -3,9 +3,10 @@
 use Core\View;
 use Core\Route;
 use App\Controllers\Admin\PageController;
-use App\Controllers\Admin\PostController;
 use App\Controllers\Admin\UserController;
 use App\Controllers\Auth\LoginController;
+use App\Controllers\Clients\HomeController;
+use App\Controllers\Clients\PostController;
 use App\Controllers\Admin\CategoryController;
 use App\Controllers\Admin\DashboardController;
 
@@ -88,9 +89,7 @@ Route::post('/admin/posts/delete/{id}', [PostController::class, 'delete'])->name
 Route::post('/admin/posts/deletes', [PostController::class, 'deletes'])->name('admin.posts.deletes');
 
 //Clients
-Route::get('/', function () {
-    echo env('DB_NAME');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/{slug}.html', function ($slug) {
     return 'Trang = '.$slug;
@@ -100,6 +99,4 @@ Route::get('/chuyen-muc/{slug}.html', function ($slug) {
     return 'Chuyên mục = '.$slug;
 })->name('categories');
 
-Route::get('/bai-viet/{slug}.html', function ($slug) {
-    return 'Bài viết = '.$slug;
-})->name('posts');
+Route::get('/bai-viet/{slug}.html', [PostController::class, 'detail'])->name('posts');

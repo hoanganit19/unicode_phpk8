@@ -3,24 +3,8 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Menu</div>
-                <a class="nav-link" href="{{route('admin.index')}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Tổng quan
-                </a>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePosts"
-                    aria-expanded="false" aria-controls="collapsePosts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Bài viết
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePosts" aria-labelledby="headingOne"
-                    data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="#">Danh sách</a>
-                        <a class="nav-link" href="#">Thêm mới</a>
-                    </nav>
-                </div>
+                {{view('layouts/admin/menu_item', ['title' => 'Bài viết', 'name' => 'posts'])}}
 
                 {{view('layouts/admin/menu_item', ['title' => 'Chuyên mục', 'name' => 'categories'])}}
 

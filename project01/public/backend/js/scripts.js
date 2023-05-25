@@ -144,4 +144,54 @@ window.addEventListener("DOMContentLoaded", (event) => {
       return "Ok";
     };
   }
+
+  //Xử lý ckfinder
+  const ckfinderGroup = document.querySelectorAll(".ckfinder-group");
+  if (ckfinderGroup.length) {
+    ckfinderGroup.forEach((group) => {
+      group.addEventListener("click", (e) => {
+        const inputEl = group.querySelector(".ckfinder-url");
+        const previewEl = group.querySelector(".ckfinder-preview");
+        if (e.target.classList.contains("ckfinder-choose")) {
+          CKFinder.modal({
+            chooseFiles: true,
+            width: 800,
+            height: 600,
+            onInit: function (finder) {
+              finder.on("files:choose", function (evt) {
+                const file = evt.data.files.first();
+                const url = file.getUrl();
+                if (inputEl !== null) {
+                  inputEl.value = url;
+                }
+
+                if (previewEl !== null) {
+                  previewEl.innerHTML = `<img src="${url}" style="max-width: 100%;"/>`;
+                }
+              });
+
+              finder.on("file:choose:resizedImage", function (evt) {
+                const url = evt.data.resizedUrl;
+                if (inputEl !== null) {
+                  inputEl.value = url;
+                }
+                if (previewEl !== null) {
+                  previewEl.innerHTML = `<img src="${url}" style="max-width: 100%;"/>`;
+                }
+              });
+            },
+          });
+        }
+
+        inputEl.addEventListener("change", (e) => {
+          const url = e.target.value;
+          if (!url) {
+            previewEl.innerText = "";
+          } else {
+            previewEl.innerHTML = `<img src="${url}" style="max-width: 100%;"/>`;
+          }
+        });
+      });
+    });
+  }
 });

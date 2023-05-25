@@ -137,7 +137,7 @@ class Route
             }
 
         } else {
-            require_once '../core/errors/404.php';
+            abort(404);
         }
 
 

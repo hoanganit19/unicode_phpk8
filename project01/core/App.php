@@ -20,6 +20,7 @@ class App
         require_once '../core/helpers/url.php';
         require_once '../core/helpers/validation.php';
         require_once '../core/helpers/config.php';
+        require_once '../core/helpers/errors.php';
         require_once '../core/helpers/view.php';
 
         $request = new Request();

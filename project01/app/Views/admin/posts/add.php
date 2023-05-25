@@ -20,6 +20,36 @@
         <span class="text-danger">{{error('content')}}</span>
     </div>
 
+    <div class="mb-3">
+        <label for="">Chuyên mục</label>
+        <select name="category_id" class="form-select">
+            <option value="">Chọn chuyên mục</option>
+            {{getCategories(categories: $categories, old: old('category_id'))}}
+        </select>
+        <span class="text-danger">{{error('category_id')}}</span>
+    </div>
+
+    <div class="mb-3">
+        <label for="">Mô tả</label>
+        <textarea name="excerpt" class="form-control" placeholder="Mô tả">{{old('excerpt')}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="">Ảnh đại diện</label>
+        <div class="row ckfinder-group">
+            <div class="col-6">
+                <input type="text" name="thumbnail" class="form-control ckfinder-url" placeholder="Url..." />
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-success ckfinder-choose">Chọn</button>
+            </div>
+            <div class="col-4">
+                <div class="ckfinder-preview"></div>
+            </div>
+        </div>
+        <span class="text-danger">{{error('thumbnail')}}</span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Lưu</button>
     <a href="#" class="btn btn-danger back">Hủy</a>
 </form>

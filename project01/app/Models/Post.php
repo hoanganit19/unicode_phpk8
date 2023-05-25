@@ -8,12 +8,12 @@ class Post extends Model
 {
     protected $table = 'posts';
 
-    public function getPosts($filters)
+    public function getPosts($filters = [], $isAdmin = true)
     {
         $where = $this->buildWhere($filters);
-        $sql = "SELECT *, c.name as category_name, c.slug as slug_category FROM $this->table as p INNER JOIN categories as c ON  p.category_id=c.id $where ORDER BY p.created_at DESC";
+        $sql = "SELECT p.*, c.name as category_name, c.slug as slug_category FROM $this->table as p INNER JOIN categories as c ON  p.category_id=c.id $where ORDER BY p.created_at DESC";
 
-        return $this->paginate($sql, config('paginate.admin'));
+        return $this->paginate($sql, $isAdmin ? config('paginate.admin') : config('paginate.client'));
     }
 
     public function addPost($attributes)
